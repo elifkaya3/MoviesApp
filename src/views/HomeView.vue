@@ -1,16 +1,15 @@
 <template>
-  <div class="home">
-    <MovieList/>
-  </div>
+  <hello-world />
 </template>
 
 <script>
+  import HelloWorld from '../components/HelloWorld'
 
-import MovieList from "@/components/MovieList"
-export default {
-  name: 'HomeView',
-  components: {
-    MovieList
+  export default {
+    name: 'Home',
+
+    components: {
+      HelloWorld,
+    },
   }
-}
 </script>

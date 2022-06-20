@@ -3,7 +3,7 @@
 <span v-for="(movie, index) in getMovieList.results"
             :key="index"> {{movie}}
 </span>
-</div>
+
   <v-card
     
     :loading="loading"
@@ -11,7 +11,7 @@
     max-width="374"
     :elevation="hover ? 16:2" :class="{'on-hover' : hover}"
   >
-      <router-link :to="`/movie/${movie.id}`">{{movie.id}}
+      <!-- <router-link :to="`/movie/${movie.id}`">{{movie.id}} -->
       
 
     <template slot="progress">
@@ -68,12 +68,13 @@
       <v-btn
         color="deep-purple lighten-2"
         text
-        @click="./components/MovieDetails"
+        @click="components/MovieDetails"
       >
         Details
       </v-btn>
     </v-card-actions>
   </v-card>
+  </div>
 </template>
 
 <script>

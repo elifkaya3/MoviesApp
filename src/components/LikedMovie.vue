@@ -5,7 +5,7 @@
     max-width="374"
     :elevation="hover ? 16:2" :class="{'on-hover' : hover}"
   >
-      <router-link :to="`/movie/${movie.id}`">{{movie.id}}
+      <!-- <router-link :to="`/movie/${movie.id}`">{{movie.id}} -->
 
     <template slot="progress">
       <v-progress-linear
@@ -58,12 +58,12 @@
     <v-divider class="mx-4"></v-divider>
 
     <v-card-text>
-      //<v-chip-group
-      //  v-model="liked"
-     //   active-class="deep-purple accent-4 white--text"
-     //   column
-     // >
-       // <v-chip>Kalp ikonu gelecek buton gelecek</v-chip>
+      <v-chip-group
+       v-model="liked"
+       active-class="deep-purple accent-4 white--text"
+       column
+     >
+        <v-chip>Kalp ikonu gelecek buton gelecek</v-chip> 
 
       
       </v-chip-group>
@@ -78,7 +78,7 @@
       <v-btn
         color="deep-purple lighten-2"
         text
-        @click="./components/MovieDetails"
+        @click="components/MovieDetails"
       >
         Details
       </v-btn>

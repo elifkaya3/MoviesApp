@@ -15,16 +15,16 @@ const routes = [
     name: 'about',
     component: () => import(/* webpackChunkName: "about" */ '../components/MovieList.vue')
   },
-  // {
-  //   path: '/',
-  //   name: 'Movie',
-  //   component: MovieDetail
-  // },
-  // {
-  //   path: '/',
-  //   name: 'Movie',
-  //   component: LikedMovie
-  // }
+  {
+    path: '/',
+    name: 'Movie',
+    component: MovieDetail
+  },
+  {
+    path: '/',
+    name: 'Movie',
+    component: LikedMovie
+  }
 ]
 
 const router = new VueRouter({
