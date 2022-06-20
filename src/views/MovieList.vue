@@ -2,12 +2,13 @@
   <v-container >
     <v-row>
         <v-col
-        cols="12"
-        sm="4">
+        cols="4"
+        sm="4"
+       style="display:contents" >
  <v-card
       :loading="loading"
-      class="mx-auto m-4"
-      max-width="300"
+      class="mx-auto my-4"
+      max-width="350"
       v-for="(movie, index) in getMovieList.results"
       :key="index"
     >
@@ -43,15 +44,18 @@
         </v-row>
 
         <div class="my-4 text-subtitle-1">•{{ movie.original_title }}</div>
-
+<!-- 
         <div>
           {{ movie.overview }}
-        </div>
+        </div> -->
       </v-card-text>
 
       <v-card-actions>
-        <v-btn color="deep-purple lighten-2" text @click="reserve">
-          Detay
+        <v-btn color="deep-purple lighten-2"  @click="detail">
+          Detail
+        </v-btn>
+        <v-btn color="deep-purple lighten-2"  @click="addToCart()">
+          Add Favourite
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -65,6 +69,8 @@
 import { mapActions, mapGetters } from "vuex";
 
 export default {
+  props:["movie"],
+  
   data: () => ({
     loading: false,
     liked: 1,
@@ -82,6 +88,11 @@ export default {
 
       setTimeout(() => (this.loading = false), 2000);
     },
+    addToCart(){
+      this.$store.dispatch('addMovieToCart',{
+        movie:this.movie
+      });
+    }
   },
   computed: {
     ...mapGetters({
@@ -90,9 +101,3 @@ export default {
   },
 };
 </script>
-<style>
- .listele{
-  display:flex;
-  justify-content:space-between;
- }
-</style>

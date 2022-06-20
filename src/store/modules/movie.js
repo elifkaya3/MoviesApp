@@ -2,12 +2,19 @@ import Api from "../../services/api";
 
 const state = {
   movies: [],
+  movie:null,
+  cart:[]
 };
 
 const mutations = {
   SET_Movies(currentState, list) {
     currentState.movies = list;
   },
+  ADD_TO_CART(state,{movie}){
+    state.cart.push({
+      movie
+    })
+  }
 };
 
 const actions = {
@@ -38,3 +45,7 @@ export default {
   actions,
   getters,
 };
+
+export const addMovieToCart=({commit},{movie})=>{
+  commit('ADD_TO_CART',{movie});
+}
