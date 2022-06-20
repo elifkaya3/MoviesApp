@@ -1,11 +1,6 @@
 <template>
-  <div class="grid">
-    <v-card
-      :loading="loading"
-      class="card"
-      v-for="(movie, index) in getMovieList.results"
-      :key="index"
-    >
+  <div class="detail-container">
+    <v-card :loading="loading" class="detail-card">
       <template slot="progress">
         <v-progress-linear
           color="deep-purple"
@@ -14,17 +9,14 @@
         ></v-progress-linear>
       </template>
 
-      <v-img
-        height="250"
-        src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-      ></v-img>
+      <v-img height="250" :src="selectedMovie.poster_path"></v-img>
 
-      <v-card-title>{{ movie.title }}</v-card-title>
+      <v-card-title>{{ selectedMovie.title }}</v-card-title>
 
       <v-card-text>
         <v-row align="center" class="mx-0">
           <v-rating
-            :value="movie.vote_average / 2"
+            :value="selectedMovie.vote_average / 2"
             color="amber"
             dense
             half-increments
@@ -33,70 +25,90 @@
           ></v-rating>
 
           <div class="grey--text ms-4">
-            {{ movie.vote_average }}
+            {{ selectedMovie.vote_average }}
+          </div>
+          <div class="grey--text ms-4">
+            Kullanılan oy sayısı: {{ selectedMovie.vote_count }}
           </div>
         </v-row>
 
-        <div class="my-4 text-subtitle-1">•{{ movie.original_title }}</div>
+        <div class="my-4 text-subtitle-1">
+          •{{ selectedMovie.original_title }}
+        </div>
 
         <div>
-          {{ movie.overview.slice(0, 150) + "..." }}
+          {{ selectedMovie.overview }}
+        </div>
+
+         <div>
+         Popularity: {{ selectedMovie.popularity }}
+        </div>
+        <div>
+         Release Date: {{ selectedMovie.release_date }}
         </div>
       </v-card-text>
 
-      <v-card-actions style="margin-left: 20px">
-        <v-btn icon @click="goDetail(movie)">
-          <v-icon>mdi-movie-open</v-icon>DETAY
+      
+
+      <v-card-actions style="margin-left: 40px">
+        <div><v-btn icon @click="goBack()">
+          <v-icon>mdi-arrow-left-thin</v-icon>Geri Dön
         </v-btn>
+        </div>
+        <div>
+          <v-btn icon @click="goFavorite()"> Favorilerim </v-btn>
+          </div>
       </v-card-actions>
     </v-card>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
-
+import { mapActions } from "vuex";
 export default {
-  data: () => ({
-    loading: false,
-    liked: 1,
-  }),
-  name: "MovieList",
-  mounted() {
-    this.getMovie();
+  components: {},
+  data: () => ({favorite: null,}),
+  name: "MovieDetail",
+
+  computed: {
+    selectedMovie() {
+      return this.$route.params;
+    },
   },
   methods: {
-    ...mapActions({
-      getMovie: "movie/getMovies",
-    }),
-    reserve() {
-      this.loading = true;
-
-      setTimeout(() => (this.loading = false), 2000);
-    },
-    goDetail(movie) {
+    goBack() {
       this.$router.push({
-        name: "MovieDetail",
-        params: movie,
+        name: "MovieList",
       });
     },
-  },
-  computed: {
-    ...mapGetters({
-      getMovieList: "movie/getMovieList",
+    goFavorite() {
+      this.favorite = this.$store.state.movie.cart;
+      this.$router.push({
+        name: "LikedMovie",
+        favorite: this.favorite,
+      });
+    },
+    ...mapActions({
+      addMovieToCart: "movie/addMovieToCart",
     }),
-  },
+    addToCart() {
+      this.addMovieToCart(this.selectedMovie);
+    },
+  }
 };
 </script>
-<style lang="scss">
-.grid {
-  display: grid;
+
+<style lang="scss" scoped>
+.detail-container {
+  display: flex;
+  justify-content: center;
   align-items: center;
-  grid-gap: 10px;
-  grid-template-columns: repeat(4, 0.1fr);
-  .card {
-    height: 600px;
-    width: 420px;
+  .detail-card {
+    width: 70%;
   }
+}
+.flex {
+  display: flex;
+  justify-content: space-between;
 }
 </style>

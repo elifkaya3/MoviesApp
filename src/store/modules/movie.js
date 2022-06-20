@@ -30,6 +30,9 @@ const actions = {
         .catch((err) => reject(err));
     });
   },
+  addMovieToCart({commit},{movie}){
+    commit('ADD_TO_CART',{movie});
+  }
 };
 
 const getters = {
@@ -46,6 +49,4 @@ export default {
   getters,
 };
 
-export const addMovieToCart=({commit},{movie})=>{
-  commit('ADD_TO_CART',{movie});
-}
+
