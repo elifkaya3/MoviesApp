@@ -11,21 +11,17 @@ const routes = [
     name: 'MovieList',
     component: MovieList
   },
-  // {
-  //   path: '/movie/:id',
-  //   name: 'MovieDetail',
-  //   component: MovieDetail
-  // },
-  // {
-  //   path: '/',
-  //   name: 'LikedMovie',
-  //   component: LikedMovie
-  // },
   {
-    path: '/about',
-    name: 'about',
-    component: () => import(/* webpackChunkName: "about" */ '../views/MovieList.vue')
-  }
+    path: "/details",
+    name: "MovieDetail",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/MovieDetail.vue"),
+  },
+  // {
+  //   path: "/favourite",
+  //   name: "LikedMovie",
+  //   component:LikedMovie
+  // }
   
 ]
 
@@ -33,6 +29,6 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
-})
+});
 
 export default router
