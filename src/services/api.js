@@ -15,7 +15,7 @@ export default class Api {
     }
      async getMovieDetail() {
         try {
-            const response = await this.http.get("/");
+            const response = await this.http.get("/id");
             return response.data;
         } catch (error) {
             console.error("Api error: ", error);

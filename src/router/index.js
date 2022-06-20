@@ -1,30 +1,32 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import MovieList from '../views/MovieList.vue'
+// import MovieDetail from '../components/MovieDetail.txt'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'MovieList',
+    component: MovieList
   },
+  // {
+  //   path: '/movie/:id',
+  //   name: 'MovieDetail',
+  //   component: MovieDetail
+  // },
+  // {
+  //   path: '/',
+  //   name: 'LikedMovie',
+  //   component: LikedMovie
+  // },
   {
     path: '/about',
     name: 'about',
-    component: () => import(/* webpackChunkName: "about" */ '../components/MovieList.vue')
-  },
-  {
-    path: '/',
-    name: 'Movie',
-    component: MovieDetail
-  },
-  {
-    path: '/',
-    name: 'Movie',
-    component: LikedMovie
+    component: () => import(/* webpackChunkName: "about" */ '../views/MovieList.vue')
   }
+  
 ]
 
 const router = new VueRouter({
